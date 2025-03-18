@@ -15,7 +15,7 @@ import 'components/address_step.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
-import 'components/verification_success.dart';
+// import 'components/verification_success.dart';
 
 class VerificationScreen extends StatefulWidget {
   const VerificationScreen({super.key});
