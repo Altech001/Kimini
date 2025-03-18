@@ -21,8 +21,8 @@ class _FirstScreenState extends State<FirstScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF1A237E), // Deep indigo
-              Colors.white, // Indigo
+              Color(0xFF0F0F1E), // Deep dark blue
+              Color(0xFF1E1E3A), // Dark indigo
             ],
           ),
         ),
@@ -31,34 +31,71 @@ class _FirstScreenState extends State<FirstScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 40),
               // App logo
-              // Icon(
-              //   CupertinoIcons.shield_fill,
-              //   size: 30,
-              //   color: Color(0xFF1A237E),
-              // ),
-              const SizedBox(height: 20),
+              Center(
+                child: Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF4A5CFF), // Bright indigo
+                        Color(0xFF2A3C9D), // Medium indigo
+                      ],
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xFF4A5CFF).withOpacity(0.3),
+                        blurRadius: 15,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    CupertinoIcons.shield_fill,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
               // App name
               const Text(
-                'Kimini',
+                'KIMINI',
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 32,
+                  letterSpacing: 2.0,
                   fontFamily: 'Georgia',
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 8),
+              // Tagline
+              const Text(
+                'Premium Identity Verification',
+                style: TextStyle(
+                  fontSize: 14,
+                  letterSpacing: 1.2,
+                  fontFamily: 'Georgia',
+                  color: Color(0xFFB0B0C0),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 40),
               // Terms and conditions title
               const Text(
                 'KYC Customer Terms & Conditions',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontFamily: 'Georgia',
                   fontWeight: FontWeight.w600,
-                  color: Colors.black54,
+                  color: Color(0xFFD0D0E0),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -66,16 +103,16 @@ class _FirstScreenState extends State<FirstScreen> {
               // Terms and conditions content
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300),
-                    borderRadius: BorderRadius.circular(8),
+                    color: Color(0xFF1A1A2E).withOpacity(0.7),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Color(0xFF3A3A5A), width: 1.5),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.transparent,
-                        blurRadius: 1,
-                        spreadRadius: 12,
-                        offset: Offset(0, 5),
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 10,
+                        spreadRadius: 1,
                       ),
                     ],
                   ),
@@ -101,28 +138,50 @@ class _FirstScreenState extends State<FirstScreen> {
                       'These terms are governed by and construed in accordance with the laws of the jurisdiction in which the company operates.\n\n'
                       'By proceeding, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions.',
                       style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black87,
-                        // color: Colors.white,
+                        fontSize: 14,
+                        height: 1.5,
+                        color: Color(0xFFB0B0C0),
                         fontFamily: 'Georgia',
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              // Checkbox to accept terms
+              const SizedBox(height: 24),
+              // Checkbox to accept terms with custom design
               Row(
                 children: [
-                  Checkbox(
-                    value: _acceptedTerms,
-                    activeColor: Color(0xFF1A237E),
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _acceptedTerms = value ?? false;
-                      });
-                    },
+                  Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color:
+                            _acceptedTerms
+                                ? Color(0xFF4A5CFF)
+                                : Color(0xFF3A3A5A),
+                        width: 2,
+                      ),
+                      color:
+                          _acceptedTerms
+                              ? Color(0xFF4A5CFF)
+                              : Colors.transparent,
+                    ),
+                    child: Checkbox(
+                      value: _acceptedTerms,
+                      activeColor: Colors.transparent,
+                      checkColor: Colors.white,
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      side: BorderSide.none,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _acceptedTerms = value ?? false;
+                        });
+                      },
+                    ),
                   ),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
@@ -131,10 +190,10 @@ class _FirstScreenState extends State<FirstScreen> {
                         });
                       },
                       child: const Text(
-                        'I have read and agreed to the Terms & Conditions above.',
+                        'I have read and agreed to the Terms & Conditions.',
                         style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black87,
+                          fontSize: 14,
+                          color: Color(0xFFD0D0E0),
                           fontFamily: 'Georgia',
                         ),
                       ),
@@ -142,8 +201,8 @@ class _FirstScreenState extends State<FirstScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
-              // Continue button
+              const SizedBox(height: 32),
+              // Continue button with enhanced design
               ElevatedButton(
                 onPressed:
                     _acceptedTerms
@@ -157,24 +216,28 @@ class _FirstScreenState extends State<FirstScreen> {
                         }
                         : null, // Button disabled if terms not accepted
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF1A237E),
-                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  backgroundColor: Color(0xFF4A5CFF),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  disabledBackgroundColor: Colors.grey.shade400,
+                  elevation: 8,
+                  shadowColor: Color(0xFF4A5CFF).withOpacity(0.5),
+                  disabledBackgroundColor: Color(0xFF2A2A3A),
+                  disabledForegroundColor: Color(0xFF6A6A7A),
                 ),
                 child: const Text(
-                  'Next',
+                  'CONTINUE',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 14,
+                    letterSpacing: 1.0,
                     fontFamily: 'Georgia',
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
             ],
           ),
         ),

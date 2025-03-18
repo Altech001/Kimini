@@ -142,21 +142,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Kimini Verification',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-            fontFamily: 'Georgia',
-          ),
-        ),
-        // backgroundColor: Theme.of(context).colorScheme.primary,
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
-        elevation: 0,
-      ),
       body: Stack(
         children: [
           Column(
@@ -280,36 +265,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
       );
     }
   }
-
-  // Future<void> _captureSelfie() async {
-  //   try {
-  //     FilePickerResult? result = await FilePicker.platform.pickFiles(
-  //       type: FileType.custom,
-  //       allowedExtensions: ['jpg', 'jpeg', 'png'],
-  //       allowMultiple: false,
-  //     );
-
-  //     if (result != null) {
-  //       String filePath = result.files.single.path!;
-  //       print('Selfie selected: $filePath');
-
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(
-  //           content: Text('Selfie uploaded successfully'),
-  //           backgroundColor: Colors.green,
-  //         ),
-  //       );
-  //     }
-  //   } catch (e) {
-  //     print('Error picking selfie: $e');
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text('Error selecting selfie: ${e.toString()}'),
-  //         backgroundColor: Colors.red,
-  //       ),
-  //     );
-  //   }
-  // }
 
   Future<void> _pickAddressDocument() async {
     try {
