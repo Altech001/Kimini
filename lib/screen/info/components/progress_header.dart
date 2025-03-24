@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class ProgressHeader extends StatelessWidget {
@@ -40,6 +42,7 @@ class ProgressHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -59,6 +62,16 @@ class ProgressHeader extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     letterSpacing: 0.5,
                   ),
+                ),
+              ),
+              Text(
+                'KYC Verification',
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                  fontFamily: 'Georgia',
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.5,
                 ),
               ),
               Container(

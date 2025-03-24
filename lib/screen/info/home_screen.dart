@@ -15,6 +15,8 @@ import 'components/address_step.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 
+import 'components/verification_success.dart';
+
 // import 'components/verification_success.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -69,6 +71,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
     {
       'title': 'Selfie Verification',
       'description': 'Take a selfie for facial recognition',
+      'isCompleted': false,
+    },
+    {
+      'title': 'Recap Document',
+      'description': 'Cross check you information before submission.',
       'isCompleted': false,
     },
     {
@@ -141,7 +148,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: Colors.grey.shade100,
       body: Stack(
         children: [
           Column(
@@ -196,73 +203,28 @@ class _VerificationScreenState extends State<VerificationScreen> {
       case 2:
         return DocumentUploadStep(
           documentType: selectedDocumentType,
-          onCaptureFront: (file) => _captureDocument(isFront: true),
-          onCaptureBack: (file) => _captureDocument(isFront: false),
+          onCaptureFront: (File? file) {},
+          onCaptureBack: (File? file) {},
         );
       case 3:
-        return SelfieStep(
-          onCaptureSelfie: (File? file) {
+        return SelfieStep(onCaptureSelfie: (File? file) {});
+      case 4:
+        return AddressStep(onUploadDocument: _pickAddressDocument);
+      case 5:
+        return PreviewStep(
+          onPressed: () {
             setState(() {
-              if (file != null) {
-                verificationSteps[currentStep]['isCompleted'] = true;
-              }
+              verificationSteps.length - 1;
+            });
+          },
+          func: (p0) {
+            setState(() {
+              verificationSteps[currentStep]['isCompleted'] = true;
             });
           },
         );
-      case 4:
-        return AddressStep(onUploadDocument: _pickAddressDocument);
       default:
         return const SizedBox();
-    }
-  }
-
-  Future<void> _captureDocument({required bool isFront}) async {
-    try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['jpg', 'jpeg', 'png', 'pdf'],
-        allowMultiple: false,
-      );
-
-      if (result != null) {
-        File file = File(result.files.single.path!);
-        print('Document ${isFront ? "front" : "back"} selected: ${file.path}');
-
-        // Show success message
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              '${isFront ? "Front" : "Back"} side document uploaded successfully',
-            ),
-            backgroundColor: Colors.green,
-          ),
-        );
-
-        // Here you would typically:
-        // 1. Upload the file to your server
-        // 2. Store the file reference
-
-        // Mark the step as completed if both sides are uploaded
-        setState(() {
-          if (isFront) {
-            _frontDocument = file;
-          } else {
-            _backDocument = file;
-          }
-
-          if (_frontDocument != null && _backDocument != null) {
-            verificationSteps[currentStep]['isCompleted'] = true;
-          }
-        });
-      }
-    } catch (e) {
-      print('Error picking document: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error selecting document: ${e.toString()}'),
-          backgroundColor: Colors.red,
-        ),
-      );
     }
   }
 
@@ -323,16 +285,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   color: Colors.blue.shade100,
                   radius: 20,
                 ),
-                // const SizedBox(height: 16),
-                // Text(
-                //   'Processing ...',
-                //   style: TextStyle(
-                //     fontSize: 14,
-                //     color: Colors.black,
-                //     fontFamily: 'Georgia',
-                //     fontWeight: FontWeight.w500,
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -344,7 +296,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   Widget _buildBottomButton() {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         child: ElevatedButton(
           onPressed: isLoading ? null : _handleContinue,
           style: ElevatedButton.styleFrom(
@@ -405,11 +357,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
     setState(() {
       isLoading = false;
     });
-    Navigator.of(
-      context,
-    ).pushReplacement(MaterialPageRoute(builder: (_) => const PreviewStep()));
-    // Navigator.of(context).pushReplacement(
-    //   MaterialPageRoute(builder: (_) => const VerificationSuccessScreen()),
-    // );
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const VerificationSuccessScreen()),
+    );
   }
 }

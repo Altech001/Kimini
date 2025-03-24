@@ -1,3 +1,5 @@
+// ignore_for_file: use_super_parameters
+
 import 'package:flutter/material.dart';
 
 class CountryDocumentStep extends StatelessWidget {
@@ -9,11 +11,11 @@ class CountryDocumentStep extends StatelessWidget {
   final Function(String) onDocumentTypeChanged;
 
   final Map<String, Color> countryColors = {
-    'Uganda': Colors.red.shade50,
-    'Kenya': Colors.green.shade100,
-    'Tanzania': Color(0xFFF3E5F5),
+    'Uganda': Colors.blue.shade50,
+    'Kenya': Colors.blue.shade100,
+    'Tanzania': Colors.purple.shade50,
     'Rwanda': Colors.blue.shade50,
-    'Burundi': Color(0xFFFFF3E0),
+    'Burundi': Colors.lightBlue.shade50,
   };
 
   final Map<String, Color> documentColors = {

@@ -28,7 +28,7 @@ class _VerificationSuccessScreenState extends State<VerificationSuccessScreen>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 800),
+      duration: const Duration(milliseconds: 100),
     );
 
     _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
