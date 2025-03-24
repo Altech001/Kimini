@@ -1,12 +1,12 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, deprecated_member_use, avoid_print
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:image/image.dart' as img;
-import 'package:path_provider/path_provider.dart';
+// import 'package:photo_view/photo_view.dart';
+// import 'package:image/image.dart' as img;
+// import 'package:path_provider/path_provider.dart';
 
 import 'image_preview_dialog.dart';
 
